@@ -48,3 +48,7 @@ Thumbs.db
 # Framework stuff #
 ###################
 .vagrant
+
+# Private config files #
+########################
+models/0.py

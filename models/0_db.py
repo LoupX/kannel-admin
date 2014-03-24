@@ -2,6 +2,7 @@
 
 
 try:
-    db = DAL('sqlite://storage.db')
+    db = DAL('postgres://{}:{}@{}:{}/{}'
+             ''.format(DB_USER, DB_PASS, DB_HOST, DB_PORT, DB))
 except Exception as e:
-    raise HTTP(503)
+    raise HTTP(503, e)
