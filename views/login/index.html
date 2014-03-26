@@ -2,10 +2,35 @@
 <? block scripts ?>
 <script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.uniform.min.js') ?>"></script>
 <script type="text/javascript" src="<? =URL('static', 'js/custom/index.js') ?>"></script>
+<script>
+    var loginApp = angular.module('loginApp', []);
+
+    function loginController($scope, $http) {
+
+        $scope.formData = {};
+
+
+        $scope.processForm = function() {
+
+            $http({
+                method: 'POST',
+                url: '<? =URL("init", "users", "api/json/login")  ?>',
+                data: $.param($scope.formData),
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+
+            .success(function(data) {
+                console.log(data);
+            });
+
+        };
+
+    }
+</script>
 <? end ?>
 
 <? block content ?>
-<body class="loginpage">
+<body class="loginpage" ng-app="loginApp" ng-controller="loginController">
 	<div class="loginbox">
     	<div class="loginboxinner">
         	
@@ -31,17 +56,17 @@
                 </div><!--loginf-->
             </div><!--nopassword-->
             
-            <form id="login" action="<? =URL('init', 'default', 'index') ?>" method="post">
+            <form id="login" ng-submit="processForm()">
             	
                 <div class="username">
                 	<div class="usernameinner">
-                        <input type="text" name="username" id="username" />
+                        <input type="text" name="username" id="username" ng-model="formData.username" />
                     </div>
                 </div>
                 
                 <div class="password">
                 	<div class="passwordinner">
-                        <input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" ng-model="formData.password" />
                     </div>
                 </div>
                 
