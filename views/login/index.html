@@ -1,11 +1,11 @@
-{{include 'base/header.html'}}
-{{block scripts}}
-<script type="text/javascript" src="{{=URL('static', 'js/plugins/jquery.uniform.min.js')}}"></script>
-<script type="text/javascript" src="{{=URL('static', 'js/custom/index.js')}}"></script>
-{{end}}
+<? extend 'login/login-layout.html' ?>
+<? block scripts ?>
+<script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.uniform.min.js') ?>"></script>
+<script type="text/javascript" src="<? =URL('static', 'js/custom/index.js') ?>"></script>
+<? end ?>
 
+<? block content ?>
 <body class="loginpage">
-
 	<div class="loginbox">
     	<div class="loginboxinner">
         	
@@ -23,25 +23,25 @@
             <div class="nopassword">
 				<div class="loginmsg">The password you entered is incorrect.</div>
                 <div class="loginf">
-                    <div class="thumb"><img alt="" src="{{ =URL('static', 'images/thumbs/avatar1.png')}}" /></div>
+                    <div class="thumb"><img alt="" src="<? =URL('static', 'images/thumbs/avatar1.png') ?>" /></div>
                     <div class="userlogged">
                         <h4></h4>
-                        <a href="{{=URL('init', 'login', 'index')}}">Not <span></span>?</a> 
+                        <a href="<? =URL('init', 'login', 'index') ?>">Not <span></span>?</a> 
                     </div>
                 </div><!--loginf-->
             </div><!--nopassword-->
             
-            <form id="login" action="{{=URL('init', 'default', 'index')}}" method="post">
+            <form id="login" action="<? =URL('init', 'default', 'index') ?>" method="post">
             	
                 <div class="username">
                 	<div class="usernameinner">
-                    	<input type="text" name="username" id="username" />
+                        <input type="text" name="username" id="username" />
                     </div>
                 </div>
                 
                 <div class="password">
                 	<div class="passwordinner">
-                    	<input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" />
                     </div>
                 </div>
                 
@@ -51,6 +51,4 @@
             
         </div><!--loginboxinner-->
     </div><!--loginbox-->
-
-</body>
-{{include 'base/footer.html'}}
+<? end ?>

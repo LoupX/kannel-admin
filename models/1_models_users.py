@@ -10,7 +10,7 @@ auth.settings.login_next = URL('default', 'index')
 auth.settings.logout_next = URL('login', 'index')
 auth.settings.login_after_registration = False
 auth.settings.expiration = 18000
-
+"""
 try:
     if db(db.auth_group).isempty():
         god_group_id = auth.add_group('GOD', 'Sys Admin')
@@ -35,3 +35,4 @@ except:
     raise HTTP(503)
 else:
     db.commit()
+"""
