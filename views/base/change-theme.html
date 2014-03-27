@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	///// CHANGE THEME /////
+    jQuery(document).ready(function() {
+        jQuery('.changetheme a').click(function(){
+            var c = jQuery(this).attr('class');
+            if(jQuery('#addonstyle').length == 0) {
+                if(c != 'default') {
+                    jQuery('head').append('<link id="addonstyle" rel="stylesheet" href="<? =URL("static", "css") ?>/style.'+c+'.css" type="text/css" />');
+                    jQuery.cookie("addonstyle", c, { path: '/' });
+                }
+            } else {
+                if(c != 'default') {
+                    jQuery('#addonstyle').attr('href','<? =URL("static", "css") ?>/style.'+c+'.css');
+                    jQuery.cookie("addonstyle", c, { path: '/' });
+                } else {
+                    jQuery('#addonstyle').remove();	
+                    jQuery.cookie("addonstyle", null);
+                }
+            }
+        });
+    });
+</script>

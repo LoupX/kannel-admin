@@ -328,26 +328,6 @@ jQuery(document).ready(function(){
 		reposSearch();
 		
 	});
-
-	
-	///// CHANGE THEME /////
-	jQuery('.changetheme a').click(function(){
-		var c = jQuery(this).attr('class');
-		if(jQuery('#addonstyle').length == 0) {
-			if(c != 'default') {
-				jQuery('head').append('<link id="addonstyle" rel="stylesheet" href="css/style.'+c+'.css" type="text/css" />');
-				jQuery.cookie("addonstyle", c, { path: '/' });
-			}
-		} else {
-			if(c != 'default') {
-				jQuery('#addonstyle').attr('href','css/style.'+c+'.css');
-				jQuery.cookie("addonstyle", c, { path: '/' });
-			} else {
-				jQuery('#addonstyle').remove();	
-				jQuery.cookie("addonstyle", null);
-			}
-		}
-	});
 	
 	///// LOAD ADDON STYLE WHEN IT'S ALREADY SET /////
 	if(jQuery.cookie('addonstyle')) {

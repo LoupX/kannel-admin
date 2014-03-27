@@ -34,3 +34,17 @@ def login():
         error['message'] = 'Can\'t process request'
         result['error'] = error
         return result
+
+
+@service.json
+def logout():
+    result = JSON
+    auth.logout()
+    if not auth.is_logged_in():
+        data['success'] = True
+        result['data'] = data
+    else:
+        error['code'] = 500
+        error['message'] = 'No se pudo cerrar la sesión'
+        result['error'] = error
+        return result

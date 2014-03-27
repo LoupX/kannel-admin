@@ -1,0 +1,29 @@
+<script>
+    var loginApp = angular.module('loginApp', []);
+
+    function loginController($scope, $http) {
+
+        $scope.formData = {};
+
+        $scope.processForm = function() {
+
+            $http({
+                method: 'POST',
+                url: '<? =URL("init", "users", "api/json/login")  ?>',
+                data: jQuery.param($scope.formData),
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+
+            .success(function(data) {
+                if (data.data) {
+                    window.location.replace('<? =URL("init", "default", "index") ?>');
+                }
+                else {
+                    console.log(data.error.message);
+                }
+            });
+
+        };
+
+    }
+</script>

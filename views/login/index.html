@@ -2,31 +2,7 @@
 <? block scripts ?>
 <script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.uniform.min.js') ?>"></script>
 <script type="text/javascript" src="<? =URL('static', 'js/custom/index.js') ?>"></script>
-<script>
-    var loginApp = angular.module('loginApp', []);
-
-    function loginController($scope, $http) {
-
-        $scope.formData = {};
-
-
-        $scope.processForm = function() {
-
-            $http({
-                method: 'POST',
-                url: '<? =URL("init", "users", "api/json/login")  ?>',
-                data: $.param($scope.formData),
-                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-            })
-
-            .success(function(data) {
-                console.log(data);
-            });
-
-        };
-
-    }
-</script>
+<? include 'login/ajax.html' ?>
 <? end ?>
 
 <? block content ?>
@@ -36,7 +12,7 @@
         	
             <div class="logo">
             	<h1><span>MENSAJETA</span>MINAS</h1>
-                <p>SMS service administrator</p>
+                <p><? =SUBTITLE ?></p>
             </div><!--logo-->
             
             <br clear="all" /><br />
