@@ -1,7 +1,5 @@
 <? extend 'login/login-layout.html' ?>
 <? block scripts ?>
-<script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.uniform.min.js') ?>"></script>
-<script type="text/javascript" src="<? =URL('static', 'js/custom/index.js') ?>"></script>
 <? include 'login/ajax.html' ?>
 <? end ?>
 
@@ -18,35 +16,24 @@
             <br clear="all" /><br />
             
             <div class="nousername">
-				<div class="loginmsg">The password you entered is incorrect.</div>
+                <div class="loginmsg" ng-model="error">{{ error }}</div>
             </div><!--nousername-->
-            
-            <div class="nopassword">
-				<div class="loginmsg">The password you entered is incorrect.</div>
-                <div class="loginf">
-                    <div class="thumb"><img alt="" src="<? =URL('static', 'images/thumbs/avatar1.png') ?>" /></div>
-                    <div class="userlogged">
-                        <h4></h4>
-                        <a href="<? =URL('init', 'login', 'index') ?>">Not <span></span>?</a> 
-                    </div>
-                </div><!--loginf-->
-            </div><!--nopassword-->
-            
+                        
             <form id="login" ng-submit="processForm()">
             	
                 <div class="username">
                 	<div class="usernameinner">
-                        <input type="text" name="username" id="username" ng-model="formData.username" />
+                        <input type="text" placeholder="Usuario" ng-model="formData.username" />
                     </div>
                 </div>
                 
                 <div class="password">
                 	<div class="passwordinner">
-                        <input type="password" name="password" id="password" ng-model="formData.password" />
+                        <input type="password" placeholder="Contraseña" ng-model="formData.password" />
                     </div>
                 </div>
                 
-                <button>Sign In</button>
+                <button>Iniciar sesi&oacute;n</button>
                 
             </form>
             
