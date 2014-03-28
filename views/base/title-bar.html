@@ -1,4 +1,10 @@
-<body class="withvernav">
+<? 
+body_class = ''
+if SIDEBAR:
+    body_class = 'withvernav'
+pass
+?>
+<body class="<? =body_class ?>" ng-app>
 
 <div class="bodywrapper">
     <div class="topheader">

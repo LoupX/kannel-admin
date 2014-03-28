@@ -2,6 +2,8 @@
 from gluon.tools import Service
 
 
+PAGE[0] = 'Usuarios'
+MENU['users'] = 'current'
 service = Service()
 
 
@@ -48,3 +50,10 @@ def logout():
         error['message'] = 'No se pudo cerrar la sesión'
         result['error'] = error
         return result
+
+
+@auth.requires(auth.has_membership(role='GOD') or
+               auth.has_membership(role='ADMINISTRATOR'))
+def index():
+    SIDEBAR = False
+    return dict(SIDEBAR=SIDEBAR)

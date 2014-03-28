@@ -6,17 +6,32 @@
             if(jQuery('#addonstyle').length == 0) {
                 if(c != 'default') {
                     jQuery('head').append('<link id="addonstyle" rel="stylesheet" href="<? =URL("static", "css") ?>/style.'+c+'.css" type="text/css" />');
-                    jQuery.cookie("addonstyle", c, { path: '/' });
                 }
             } else {
                 if(c != 'default') {
                     jQuery('#addonstyle').attr('href','<? =URL("static", "css") ?>/style.'+c+'.css');
-                    jQuery.cookie("addonstyle", c, { path: '/' });
                 } else {
                     jQuery('#addonstyle').remove();	
-                    jQuery.cookie("addonstyle", null);
                 }
             }
         });
     });
+
+    function themeController($scope, $http){
+
+        $scope.updateTheme = function(theme) {
+
+            var data = new Object();
+            data.theme = theme;
+
+            $http({
+                method: 'POST',
+                url: '<? =URL("init", "common", "api/json/change_theme")  ?>',
+                data: data,
+                headers : { 'Content-Type': 'application/json' }
+            });
+
+        }
+
+    }
 </script>

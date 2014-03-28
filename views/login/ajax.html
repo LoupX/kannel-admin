@@ -1,6 +1,4 @@
-<script>
-    var loginApp = angular.module('loginApp', []);
-
+<script type="text/javascript">
     function loginController($scope, $http) {
 
         $scope.formData = {};
@@ -21,20 +19,22 @@
                         window.location.replace('<? =URL("init", "default", "index") ?>');
                     }
                     else {
-                        jQuery('.nousername').fadeOut();
-                        jQuery('.nousername').fadeIn();
-                        $scope.error = data.error.message;
+                        fade($scope, data.error.message);
                     }
                 });
 
             }
             else {
-                jQuery('.nousername').fadeOut();
-                jQuery('.nousername').fadeIn();
-                $scope.error = 'Debe llenar todos los campos';
+                fade($scope, 'Debe llenar todos los campos');
             }
 
         };
 
+    }
+
+    function fade($scope, message) {
+        jQuery('.nousername').fadeOut();
+        $scope.error = message;
+        jQuery('.nousername').fadeIn();
     }
 </script>

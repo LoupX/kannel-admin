@@ -1,29 +1,31 @@
-            <div class="userinfo">
-                <img src="<? =URL('static', 'images/thumbs/avatar.png') ?>" alt="" />
-                <span><? =auth.user.first_name + ' ' + auth.user.last_name ?></span>
-            </div><!--userinfo-->
-            
-            <div class="userinfodrop">              
-                <div class="avatar">
-                    <a href=""><img src="<? =URL('static', 'images/thumbs/avatarbig.png') ?>" alt="" /></a>
-                    <div class="changetheme">
-                        Cambiar tema: <br />
-                        <a class="default"></a>
-                        <a class="blueline"></a>
-                        <a class="greenline"></a>
-                        <a class="contrast"></a>
-                        <a class="custombg"></a>
-                    </div>
-                </div><!--avatar-->
-                <div class="userdata">
-                    <h4><? =auth.user.first_name + ' ' + auth.user.last_name ?></h4>
-                    <span class="email"><? =auth.user.email ?></span>
-                    <ul>
-                        <li><a href="editprofile.html">Editar perfil</a></li>
-                        <li><a href="help.html">Ayuda</a></li>
-                        <li><a href="<? =URL('init', 'users', 'logout') ?>">Cerrar Sesión</a></li>
-                    </ul>
-                </div><!--userdata-->
-            </div><!--userinfodrop-->
-        </div><!--right-->
-    </div><!--topheader-->
+<div class="userinfo">
+    <img src="<? =URL('static', 'images/thumbs/avatar.png') ?>" alt="" />
+    <span><? =auth.user.first_name + ' ' + auth.user.last_name ?></span>
+</div><!--userinfo-->
+
+<div class="userinfodrop">              
+    <div class="avatar">
+        <a href=""><img src="<? =URL('static', 'images/thumbs/avatarbig.png') ?>" alt="" /></a>
+        <div class="changetheme" ng-app="themeApp" ng-controller="themeController">
+            Cambiar tema: <br />
+            <a class="default" ng-click="updateTheme('default')"></a>
+            <a class="blueline" ng-click="updateTheme('blueline')"></a>
+            <a class="greenline" ng-click="updateTheme('greenline')"></a>
+            <a class="contrast" ng-click="updateTheme('contrast')"></a>
+            <a class="custombg" ng-click="updateTheme('custombg')"></a>
+        </div>
+    </div><!--avatar-->
+    <div class="userdata">
+        <h4><? =auth.user.first_name + ' ' + auth.user.last_name ?></h4>
+        <span class="email"><? =auth.user.email ?></span>
+        <ul>
+            <li><a href="editprofile.html">Editar perfil</a></li>
+            <li><a href="help.html">Ayuda</a></li>
+            <li><a href="<? =URL('init', 'users', 'logout') ?>">Cerrar Sesión</a></li>
+        </ul>
+    </div><!--userdata-->
+</div><!--userinfodrop-->
+
+<!-- From title-bar.html -->
+</div><!--right-->
+</div><!--topheader-->

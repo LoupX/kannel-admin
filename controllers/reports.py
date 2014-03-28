@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
 
-PAGE[0] = 'Dashboard'
-MENU['dashboard'] = 'current'
+PAGE[0] = 'Reportes'
+MENU['reports'] = 'current'
 
 
-@auth.requires_login()
 def index():
     SIDEBAR = False
     return dict(SIDEBAR=SIDEBAR)

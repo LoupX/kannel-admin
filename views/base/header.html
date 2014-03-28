@@ -3,8 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Login Page | Amanda Admin Template</title>
+<title><? =PAGE[0] + ' | ' + TITLE + ' ' + SUBTITLE ?></title>
 <link rel="stylesheet" href="<? =URL('static', 'css/style.default.css') ?>" type="text/css" />
+<? if auth.is_logged_in() and auth.user.theme and auth.user.theme != 'default': ?>
+    <? addonstyle = 'css/style.{}.css'.format(auth.user.theme) ?>
+    <link rel="stylesheet" id="addonstyle" href="<? =URL('static', addonstyle) ?>" type="text/css" />
+<? pass ?>
 <? block css ?>
 <? end ?>
 <script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery-1.7.min.js') ?>"></script>
