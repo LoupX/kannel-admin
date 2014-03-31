@@ -1,0 +1,55 @@
+<script type="text/javascript">
+    function userController($scope, $http, $timeout) {
+
+        $scope.formData = {}
+
+        $scope.userSelect = function() {
+
+            if (!$scope.formData.user) {
+                $scope.formData = {};
+                $timeout(jQuery.uniform.update, 0);
+            }
+            else {
+                $http.post("<? =URL('init', 'users', 'api/json/read') ?>",
+                        {"user": $scope.formData.user})
+                .success(function(data){
+                    user = data.data;
+                    form = {'first_name': user.first_name, 'last_name': user.last_name,
+                            'username': user.username, 'email': user.email,
+                            'group': user.group_id, 'id': user.id};
+                    $scope.formData = form;
+                    $timeout(jQuery.uniform.update, 0);
+                });
+            }
+
+        }
+
+        $scope.processForm = function() {
+
+            if ($scope.formData.id) {
+                update($scope, $http);
+            }
+            else {
+                create($scope, $http);
+            }
+
+        }
+
+    }
+
+    function update($scope, $http) {
+        $http.post("<? =URL('init', 'users', 'api/json/update') ?>",
+                   $scope.formData)
+            .success(function(data) {
+                console.log(data);
+            });
+    }
+
+    function create($scope, $http) {
+        $http.post("<? =URL('init', 'users', 'api/json/create') ?>",
+                   $scope.formData)
+            .success(function(data) {
+                console.log(data);
+            });
+    }
+</script>

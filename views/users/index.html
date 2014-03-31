@@ -1,16 +1,31 @@
 <? extend 'base/layout.html' ?>
+
+<? block scripts ?>
+<script type="text/javascript" src="<? =URL('static', 'js/plugins/chosen.jquery.min.js') ?>"></script>
+<script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.uniform.min.js') ?>"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        jQuery(".chzn-select").chosen();
+        jQuery('input:checkbox, input:radio, select.uniformselect, input:file').uniform();
+    });
+</script>
+<? include 'users/ajax.html' ?>
+<? end ?>
+
 <? block content ?>
 
 <div class="pageheader notab">
     <h1 class="pagetitle">Usuarios</h1>
-    <span class="pagedesc">Administraci&oacute;n de usuarios del sistema</span> 
 </div><!--pageheader-->
 
 <div id="contentwrapper" class="contentwrapper lineheight21">
         
     <div class="contenttitle2">
-        <h3>Work in progress</h3>
+        <h3>Actualizar datos</h3>
     </div>
+
+    <? include 'users/form.html' ?>
+
     <br />
 
 </div><!--contentwrapper-->

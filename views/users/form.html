@@ -1,0 +1,50 @@
+<form class="stdform stdform2" ng-controller="userController" ng-submit="processForm()">
+    <p>
+        <label>Seleccione un usuario</label>
+        <span class="field">
+            <select data-placeholder="Seleccione un usuario..." class="chzn-select" style="width:350px;"
+                ng-change="userSelect()" ng-model="formData.user">
+                <option value=""></option> 
+                <option value="">Nuevo usuario</option> 
+                <? for user in users: ?>
+                    <option value="<? =user.id ?>"><? =user.username ?></option> 
+                <? pass ?>
+            </select>
+        </span>    
+    </p>
+
+    <p>
+        <label>Nombres</label>
+        <span class="field"><input type="text" class="longinput" tabindex="1" ng-model="formData.first_name" /></span>
+    </p>
+    
+    <p>
+        <label>Apellidos</label>
+        <span class="field"><input type="text" class="longinput" tabindex="2" ng-model="formData.last_name" /></span>
+    </p>
+
+    <p>
+        <label>Nombre de usuario</label>
+        <span class="field"><input type="text" class="longinput" tabindex="3" ng-model="formData.username" /></span>
+    </p>       
+
+    <p>
+        <label>Email</label>
+        <span class="field"><input type="text" class="longinput" tabindex="4" ng-model="formData.email" /></span>
+    </p>
+    
+    <p>
+        <label>Grupo</label>
+        <span class="field"><select class="uniformselect" style="opacity: 0;" tabindex="5" ng-model="formData.group">
+            <option value="">Seleccionar</option>
+            <? for group in groups: ?>
+                <option value="<? =group.id ?>"><? =group.description ?></option>
+            <? pass ?>
+        </select></span>
+    </p>
+                            
+    <p class="stdformbutton">
+        <input type="hidden" ng-model="formData.id" tabindex="9" />
+        <button class="submit radius2">Guardar</button>
+    </p>
+</form>
