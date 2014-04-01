@@ -53,13 +53,30 @@ def logout():
         result['error'] = error
         return result
 
+@service.json
+@auth.requires_membership('ADMIN')
+def list():
+    result = JSON
+    error = {}
+    table = db.auth_user
+    fields = table.fields
+    fields.remove('password')
+    try:
+        users = db(table).select(*[table[field] for field in fields])
+        result['data'] = users
+    except:
+        error['code'] = 500
+        error['message'] = 'No se pudieron obtener los datos'
+        result['error'] = error
+    return result
+
 
 @service.json
 @auth.requires_membership('ADMIN')
 def create():
     result = JSON
-    error = dict()
-    data = dict()
+    error = {}
+    data = {}
     v = request.vars
     user = {}
     user['first_name'] = v.first_name
@@ -192,7 +209,26 @@ def update():
 @service.json
 @auth.requires_membership('ADMIN')
 def delete():
-    pass
+    result = JSON
+    error = {}
+    data = {}
+    user_id = request.vars.id
+    if user_id == auth.user.id:
+        error['code'] = 400
+        error['message'] = 'No se puede eliminar al usuario actual'
+        result['error'] = error
+        return result
+    try:
+        del db.auth_user[user_id]
+        db.commit()
+        data['success'] = True
+        result['data'] = data
+    except:
+        db.rollback()
+        error['code'] = 500
+        error['message'] = 'No se pudo realizar la operación.'
+        result['error'] = error
+    return result
 
 
 # Section: Views {{{1

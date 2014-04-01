@@ -5,8 +5,9 @@
 <script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.uniform.min.js') ?>"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
-        jQuery(".chzn-select").chosen();
+        //jQuery('.chzn-select').chosen();
         jQuery('input:checkbox, input:radio, select.uniformselect, input:file').uniform();
+        jQuery('#notification').hide();
     });
 </script>
 <? include 'users/ajax.html' ?>
@@ -18,7 +19,7 @@
     <h1 class="pagetitle">Usuarios</h1>
 </div><!--pageheader-->
 
-<div id="contentwrapper" class="contentwrapper lineheight21">
+<div id="contentwrapper" class="contentwrapper lineheight21" ng-controller="userController">
         
     <div class="contenttitle2">
         <h3>Actualizar datos</h3>

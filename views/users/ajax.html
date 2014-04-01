@@ -1,12 +1,24 @@
 <script type="text/javascript">
+
     function userController($scope, $http, $timeout) {
 
-        $scope.formData = {}
+        $scope.formData = {'user': ''};
+        $scope.users = [{'id': '', 'username': 'Nuevo usuario'}];
+
+        $scope.fetchUsers = function() {
+            $http.get('<? =URL("init", "users", "api/json/list") ?>')
+                .then(function(result) {
+                    $scope.users = result.data.data;
+                    $scope.users.unshift({'id': '', 'username': 'Nuevo usuario'});
+            });
+        };
+
+        $scope.fetchUsers();
 
         $scope.userSelect = function() {
 
             if (!$scope.formData.user) {
-                $scope.formData = {};
+                $scope.formData = {'user': ''};
                 $timeout(jQuery.uniform.update, 0);
             }
             else {
@@ -16,40 +28,84 @@
                     user = data.data;
                     form = {'first_name': user.first_name, 'last_name': user.last_name,
                             'username': user.username, 'email': user.email,
-                            'group': user.group_id, 'id': user.id};
+                            'group': user.group_id, 'id': user.id, 'user': user.id};
                     $scope.formData = form;
                     $timeout(jQuery.uniform.update, 0);
                 });
             }
 
-        }
+        };
 
         $scope.processForm = function() {
 
             if ($scope.formData.id) {
-                update($scope, $http);
+                update($scope, $http, $timeout);
             }
             else {
-                create($scope, $http);
+                create($scope, $http, $timeout);
             }
 
-        }
+        };
+
+        $scope.deleteUser = function() {
+            jConfirm('¿Está seguro que desea eliminar a este usuario?', 'Eliminar usuario',function(r) {
+                if (r) {
+                $http.post('<? =URL("init", "users", "api/json/delete") ?>',
+                           {'id':$scope.formData.id})
+                    .success(function(response) {
+                        if (response.data) {
+                            notification($scope, 'msgsuccess', 'Se eliminó al usuario correctamente.');
+                            resetForm($scope, $timeout);
+                        }
+                        else {
+                            notification($scope, 'msgerror', '[' + response.error.code + '] ' + response.error.message);
+                        }
+                    });
+                }
+            });
+        };
 
     }
 
-    function update($scope, $http) {
+    function update($scope, $http, $timeout) {
         $http.post("<? =URL('init', 'users', 'api/json/update') ?>",
                    $scope.formData)
             .success(function(data) {
-                console.log(data);
+                if(data.data) {
+                    notification($scope, 'msgsuccess', 'Se actualizaron los datos correctamente.'); 
+                    resetForm($scope, $timeout);
+                }
+                else {
+                    notification($scope, 'msgerror', '[' + data.error.code + '] ' + data.error.message);
+                }
             });
     }
 
-    function create($scope, $http) {
+    function create($scope, $http, $timeout) {
         $http.post("<? =URL('init', 'users', 'api/json/create') ?>",
                    $scope.formData)
             .success(function(data) {
-                console.log(data);
+                if(data.data) {
+                    notification($scope, 'msgsuccess', 'Se creó el usuario correctamente.'); 
+                    resetForm($scope, $timeout);
+                }
+                else {
+                    notification($scope, 'msgerror', '[' + data.error.code + '] ' + data.error.message);
+                }
             });
+    }
+
+    function notification($scope, type, text) {
+        jQuery('#notification').hide();
+        $scope.message = {};
+        $scope.message.type = type;
+        $scope.message.text = text;
+        jQuery('#notification').fadeIn();
+    }
+
+    function resetForm($scope, $timeout) {
+        $scope.fetchUsers();
+        $scope.formData = {'user': ''};
+        $timeout(jQuery.uniform.update, 0);
     }
 </script>
