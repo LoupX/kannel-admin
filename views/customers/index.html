@@ -11,6 +11,11 @@
     <div class="contenttitle2">
         <h3>Work in progress</h3>
     </div>
+    <? if 'SUPPORT' in auth.user_groups.values(): ?>
+        <p>Sólo puedo solicitar bajas porque soy operador telefónico</p>
+    <? else: ?>
+        <p>Puedo hacer cualquier operación a los clientes</p>
+    <? pass ?>
     <br />
 
 </div><!--contentwrapper-->

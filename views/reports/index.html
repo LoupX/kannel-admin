@@ -1,4 +1,12 @@
 <? extend 'base/layout.html' ?>
+
+<? block scripts ?>
+<script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.flot.min.js') ?>"></script>
+<script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.flot.pie.js') ?>"></script>
+<script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.flot.resize.min.js') ?>"></script>
+<script type="text/javascript" src="<? =URL('static', 'js/custom/charts.js') ?>"></script>
+<? end ?>
+
 <? block content ?>
 
 <div class="pageheader notab">
@@ -9,8 +17,11 @@
 <div id="contentwrapper" class="contentwrapper lineheight21">
         
     <div class="contenttitle2">
-        <h3>Work in progress</h3>
+        <h3>Dummy</h3>
     </div>
+
+    <? include 'reports/graphics.html' ?>
+
     <br />
 
 </div><!--contentwrapper-->

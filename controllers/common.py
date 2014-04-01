@@ -10,6 +10,7 @@ def api():
 
 
 @service.json
+@auth.requires_login()
 def change_theme():
     user_id = auth.user.id
     theme = request.vars['theme']

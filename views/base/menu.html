@@ -1,10 +1,14 @@
 <div class="header">
 
     <ul class="headermenu">
-        <li class="<? =MENU['dashboard'] ?>"><a href="<? =URL('init', 'default', 'index') ?>"><span class="icon icon-flatscreen"></span>Dashboard</a></li>
-        <li class="<? =MENU['posts'] ?>"><a href="<? =URL('init', 'posts', 'index') ?>"><span class="icon icon-message"></span>Publicaciones</a></li>
-        <? if 'ADMIN' in auth.user_groups.values(): ?>
+        <? if 'ADMIN' in auth.user_groups.values() or 'EDITOR' in auth.user_groups.values(): ?>
+            <li class="<? =MENU['dashboard'] ?>"><a href="<? =URL('init', 'default', 'index') ?>"><span class="icon icon-flatscreen"></span>Dashboard</a></li>
+            <li class="<? =MENU['posts'] ?>"><a href="<? =URL('init', 'posts', 'index') ?>"><span class="icon icon-message"></span>Publicaciones</a></li>
+        <? pass ?>
+        <? if 'ADMIN' in auth.user_groups.values() or 'SUPPORT' in auth.user_groups.values(): ?>
             <li class="<? =MENU['customers'] ?>"><a href="<? =URL('init', 'customers', 'index') ?>"><span class="icon icon-pencil"></span>Clientes</a></li>
+        <? pass ?>
+        <? if 'ADMIN' in auth.user_groups.values(): ?>
             <li class="<? =MENU['reports'] ?>"><a href="<? =URL('init', 'reports', 'index') ?>"><span class="icon icon-chart"></span>Reportes</a></li>
             <li class="<? =MENU['users'] ?>"><a href="<? =URL('init', 'users', 'index') ?>"><span class="icon icon-user"></span>Usuarios</a></li>
         <? pass ?>

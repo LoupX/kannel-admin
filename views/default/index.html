@@ -9,8 +9,13 @@
 <div id="contentwrapper" class="contentwrapper lineheight21">
         
     <div class="contenttitle2">
-        <h3>Work in progress</h3>
+        <h3>Work in progress</h3> 
     </div>
+    <? if 'EDITOR' in auth.user_groups.values(): ?>
+        <p>Datos relevantes para el editor</p>        
+    <? else: ?>
+        <p>Datos relevantes para el administrador</p>
+    <? pass ?>
     <br />
 
 </div><!--contentwrapper-->
