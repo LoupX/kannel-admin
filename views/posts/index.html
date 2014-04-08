@@ -1,18 +1,25 @@
 <? extend 'base/layout.html' ?>
+
 <? block content ?>
 
-<div class="pageheader notab">
-    <h1 class="pagetitle">Publicaciones</h1>
-    <span class="pagedesc">Edici&oacute;n, calendarizaci&oacute;n y env&iacute;o de publicaciones</span> 
-</div><!--pageheader-->
+<? include 'posts/sidebar.html' ?>
 
-<div id="contentwrapper" class="contentwrapper lineheight21">
-        
-    <div class="contenttitle2">
-        <h3>Work in progress</h3>
-    </div>
-    <br />
+<div class="centercontent">
 
-</div><!--contentwrapper-->
+    <div class="pageheader notab">
+        <h1 class="pagetitle">Publicaciones</h1>
+        <span class="pagedesc">Edición, calendarización y envío de publicaciones</span>
+    </div><!--pageheader-->
+
+    <div id="contentwrapper" class="contentwrapper lineheight21">
+
+        <div class="contenttitle2">
+            <h3>Consultar publicaciones</h3>
+        </div>
+        <br />
+
+    </div><!--contentwrapper-->
+
+</div><!--centercontent-->
 
 <? end ?>

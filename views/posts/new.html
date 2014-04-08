@@ -1,0 +1,39 @@
+<? extend 'base/layout.html' ?>
+
+<? block scripts ?>
+<script type="text/javascript" src="<? =URL('static', 'js/custom/notification.js') ?>"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+
+    // Notifications
+    jQuery('#notification').hide();
+
+});
+</script>
+<? end ?>
+
+<? block content ?>
+
+<? include 'posts/sidebar.html' ?>
+
+<div class="centercontent">
+
+    <div class="pageheader notab">
+        <h1 class="pagetitle">Publicaciones</h1>
+        <span class="pagedesc">Edición, calendarización y envío de publicaciones</span>
+    </div><!--pageheader-->
+
+    <div id="contentwrapper" class="contentwrapper lineheight21">
+
+        <div ng-model="message.type" class="notibar {{ message.type }}" id="notification">
+            <a class="close"></a>
+            <p ng-model="message.text">{{ message.text }}</p>
+        </div>
+
+        <? include 'posts/form.html' ?>
+
+    </div><!--contentwrapper-->
+
+</div><!--centercontent-->
+
+<? end ?>

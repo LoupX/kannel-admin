@@ -5,7 +5,6 @@
 <script type="text/javascript" src="<? =URL('static', 'js/plugins/jquery.uniform.min.js') ?>"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
-        //jQuery('.chzn-select').chosen();
         jQuery('input:checkbox, input:radio, select.uniformselect, input:file').uniform();
         jQuery('#notification').hide();
     });
@@ -20,9 +19,14 @@
 </div><!--pageheader-->
 
 <div id="contentwrapper" class="contentwrapper lineheight21" ng-controller="userController">
-        
+
     <div class="contenttitle2">
         <h3>Actualizar datos</h3>
+    </div>
+
+    <div ng-model="message.type" class="notibar {{ message.type }}" id="notification">
+        <a class="close"></a>
+        <p ng-model="message.text">{{ message.text }}</p>
     </div>
 
     <? include 'users/form.html' ?>

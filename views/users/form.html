@@ -1,7 +1,3 @@
-<div ng-model="message.type" class="notibar {{ message.type }}" id="notification">
-    <a class="close"></a>
-    <p ng-model="message.text">{{ message.text }}</p>
-</div><!-- notification msgsuccess -->
 <form class="stdform stdform2"  ng-submit="processForm()">
     <p>
         <label>Seleccione un usuario</label>
@@ -10,14 +6,14 @@
                 ng-change="userSelect()" ng-model="formData.user"
                 ng-options="user.id as user.username for user in users">
             </select>
-        </span>    
+        </span>
     </p>
 
     <p>
         <label>Nombres</label>
         <span class="field"><input type="text" class="longinput" tabindex="1" ng-model="formData.first_name" /></span>
     </p>
-    
+
     <p>
         <label>Apellidos</label>
         <span class="field"><input type="text" class="longinput" tabindex="2" ng-model="formData.last_name" /></span>
@@ -26,13 +22,13 @@
     <p>
         <label>Nombre de usuario</label>
         <span class="field"><input type="text" class="longinput" tabindex="3" ng-model="formData.username" /></span>
-    </p>       
+    </p>
 
     <p>
         <label>Email</label>
         <span class="field"><input type="text" class="longinput" tabindex="4" ng-model="formData.email" /></span>
     </p>
-    
+
     <p>
         <label>Grupo</label>
         <span class="field"><select class="uniformselect" style="opacity: 0;" tabindex="5" ng-model="formData.group">
@@ -42,7 +38,7 @@
             <? pass ?>
         </select></span>
     </p>
-                            
+
     <p class="stdformbutton">
         <input type="hidden" ng-model="formData.id" tabindex="9" />
         <button class="submit radius2">Guardar</button>
