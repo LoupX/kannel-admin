@@ -3,7 +3,7 @@
     <span><? =auth.user.first_name + ' ' + auth.user.last_name ?></span>
 </div><!--userinfo-->
 
-<div class="userinfodrop">              
+<div class="userinfodrop">
     <div class="avatar">
         <a href=""><img src="<? =URL('static', 'images/thumbs/avatarbig.png') ?>" alt="" /></a>
         <div class="changetheme" ng-app="themeApp" ng-controller="themeController">
@@ -19,7 +19,8 @@
         <h4><? =auth.user.first_name + ' ' + auth.user.last_name ?></h4>
         <span class="email"><? =auth.user.email ?></span>
         <ul>
-            <li><a href="<? =URL('init', 'users', 'index') ?>">Cambiar contraseña</a></li>
+            <li ng-controller="passwordController"><a href="#" ng-click="changePassword()">
+                Cambiar contraseña</a></li>
             <li><a href="mailto:jd@beardcode.mx">Ayuda</a></li>
             <li><a href="<? =URL('init', 'users', 'logout') ?>">Cerrar Sesión</a></li>
             <br />

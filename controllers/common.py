@@ -39,3 +39,8 @@ def change_theme():
         result['error'] = error
 
     return result
+
+
+@service.json
+def echo():
+    return request.vars

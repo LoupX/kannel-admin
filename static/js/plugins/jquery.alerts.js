@@ -39,29 +39,36 @@
 		okButton: '&nbsp;OK&nbsp;',         // text for the OK button
 		cancelButton: '&nbsp;Cancel&nbsp;', // text for the Cancel button
 		dialogClass: null,                  // if specified, this class will be applied to all dialogs
-		
+
 		// Public methods
-		
+
 		alert: function(message, title, callback) {
 			if( title == null ) title = 'Alert';
 			$.alerts._show(title, message, null, 'alert', function(result) {
 				if( callback ) callback(result);
 			});
 		},
-		
+
 		confirm: function(message, title, callback) {
 			if( title == null ) title = 'Confirm';
 			$.alerts._show(title, message, null, 'confirm', function(result) {
 				if( callback ) callback(result);
 			});
 		},
-			
+
 		prompt: function(message, value, title, callback) {
 			if( title == null ) title = 'Prompt';
-			$.alerts._show(title, message, value, 'prompt', function(result) {
-				if( callback ) callback(result);
-			});
+            $.alerts._show(title, message, value, 'prompt', function(result) {
+                if( callback ) callback(result);
+            });
 		},
+
+        promptpass: function(message, value, title, callback) {
+            if( title == null ) title = 'Prompt';
+            $.alerts._show(title, message, value, 'promptpass', function(result) {
+                if( callback ) callback(result);
+            });
+        },
 		
 		// Private methods
 		
@@ -132,6 +139,25 @@
 				break;
 				case 'prompt':
 					$("#popup_message").append('<br /><input type="text" size="30" id="popup_prompt" />').after('<div id="popup_panel"><input type="button" value="' + $.alerts.okButton + '" id="popup_ok" /> <input type="button" value="' + $.alerts.cancelButton + '" id="popup_cancel" /></div>');
+					$("#popup_prompt").width( $("#popup_message").width() );
+					$("#popup_ok").click( function() {
+						var val = $("#popup_prompt").val();
+						$.alerts._hide();
+						if( callback ) callback( val );
+					});
+					$("#popup_cancel").click( function() {
+						$.alerts._hide();
+						if( callback ) callback( null );
+					});
+					$("#popup_prompt, #popup_ok, #popup_cancel").keypress( function(e) {
+						if( e.keyCode == 13 ) $("#popup_ok").trigger('click');
+						if( e.keyCode == 27 ) $("#popup_cancel").trigger('click');
+					});
+					if( value ) $("#popup_prompt").val(value);
+					$("#popup_prompt").focus().select();
+				break;
+                case 'promptpass':
+					$("#popup_message").append('<br /><input type="password" size="30" id="popup_prompt" />').after('<div id="popup_panel"><input type="button" value="' + $.alerts.okButton + '" id="popup_ok" /> <input type="button" value="' + $.alerts.cancelButton + '" id="popup_cancel" /></div>');
 					$("#popup_prompt").width( $("#popup_message").width() );
 					$("#popup_ok").click( function() {
 						var val = $("#popup_prompt").val();
@@ -231,5 +257,8 @@
 	jPrompt = function(message, value, title, callback) {
 		$.alerts.prompt(message, value, title, callback);
 	};
-	
+	jPass = function(message, value, title, callback) {
+        $.alerts.promptpass(message, value, title, callback);
+    };
+
 })(jQuery);
