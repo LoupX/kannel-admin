@@ -129,6 +129,65 @@ def create():
 
 
 @service.json
+@auth.requires_login()
+def check_password():
+    result = JSON
+    password = request.vars.password
+    data = {}
+    error = {}
+    current = []
+    if not password:
+        error['code'] = 400
+        error['message'] = 'Petición incorrecta.'
+        result['error'] = error
+        return result
+    try:
+        current.append(db.auth_user.password.validate(password)[0])
+        current.append(db(db.auth_user.id==auth.user.id).select(
+            db.auth_user.id, db.auth_user.password).first())
+        current[1] = current[1].password
+        if current[0] == current[1]:
+            data['success'] = True
+            result['data'] = data
+        else:
+            error['code'] = 401
+            error['message'] = 'Contraseña incorrecta.'
+            result['error'] = error
+    except:
+        error['code'] = 500
+        error['message'] = 'No se pudo completar la petición.'
+        result['error'] = error
+    return result
+
+
+@service.json
+@auth.requires_login()
+def change_password():
+    result = JSON
+    password = request.vars.password
+    data = {}
+    error = {}
+    if not password:
+        error['code'] = 400
+        error['message'] = 'Petición incorrecta'
+        result['error'] = error
+        return result
+    try:
+        new = db.auth_user.password.validate(password)[0]
+        row = db(db.auth_user.id==auth.user.id).select(
+            db.auth_user.id, db.auth_user.password).first()
+        row.password = new
+        row.update_record()
+        data['data'] = True
+        result['data'] = data
+    except:
+        error['code'] = 500
+        error['message'] = 'No se pudo completar la petición'
+        result['error'] = error
+    return result
+
+
+@service.json
 @auth.requires_membership('ADMIN')
 def read():
     result = JSON
