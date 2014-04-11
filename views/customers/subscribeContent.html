@@ -1,0 +1,31 @@
+<div class="centercontent">
+    <div class="pageheader">
+        <h1 class="pagetitle">Clientes</h1>
+        <span class="pagedesc">En esta secci&oacute;n se realizan operaciones con clientes.</span>
+
+        <ul class="hornav">
+            <li class="current"><a href="#single">Single number</a></li>
+            <li><a href="#txtfile">Archivo txt</a></li>
+        </ul>
+    </div><!--pageheader-->
+
+    <div id="contentwrapper" class="contentwrapper">
+
+        <!--Single number to send-->
+         <div id="single" class="subcontent">
+            <form>
+                <p><h4>Desde aqu&iacute; puede dar de a un solo cliente.</h4></p>
+                <input type="text" class="fullwidth" placeholder="Introduzca el n&uacute;mero aqu&iacute; "/>
+                <br/><br/>
+                <button class="quickformbutton">Enviar</button>
+
+            </form>
+
+         </div>
+
+        <!--Upload txt to send-->
+        <? include 'customers/txtfile.html' ?>
+
+    </div><!--contentwrapper-->
+
+</div><!--centercontent-->

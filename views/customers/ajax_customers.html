@@ -1,0 +1,61 @@
+<script type="text/javascript">
+
+
+    var x = null;
+    function customerController($scope, $http, $timeout, $element){
+
+        //ng-change :(
+        var fileInput = $element.find('input[id=txtFile');
+        fileInput.bind('change', function(e) {
+                        console.log($scope.txtFile);
+                        $scope.notReady = e.target.files.length == 0;
+                        $scope.files = [];
+                        for(i in e.target.files) {
+                  //Only push if the type is object for some stupid-ass reason browsers like to include functions and other junk
+                            if(typeof e.target.files[i] == 'object') $scope.files.push(e.target.files[i]);
+                        }
+
+                    });
+
+        $scope.change = function(){
+            console.log("Chrome rules");
+        }
+
+
+        $scope.upload = function() {
+
+            var formData = new FormData();
+            for(i in $scope.files) {
+                formData.append('file_'+i, $scope.files[i]);
+            }
+
+            x = formData; // tmp var to learn how to manage that...
+
+            $http({
+                method: 'POST',
+                url: "<? =URL('init', 'customers', 'api/json/upload') ?>",
+                data: formData,
+                headers: {'Content-Type': undefined},
+                transformRequest: angular.identity})
+            .success(function(data, status, headers, config){
+                console.log(data);
+            });
+        };
+
+       /* $http.post("<? =URL('init', 'users', 'api/json/read') ?>",
+                        {"user": $scope.formData.user})
+                .success(function(data){
+                    user = data.data;
+                    form = {'first_name': user.first_name, 'last_name': user.last_name,
+                            'username': user.username, 'email': user.email,
+                            'group': user.group_id, 'id': user.id, 'user': user.id};
+                    $scope.formData = form;
+                    $timeout(jQuery.uniform.update, 0);
+                });
+*/
+
+    }
+
+
+
+</script>
