@@ -1,0 +1,11 @@
+<div id="txtfile" class="subcontent" style="display: none" ng-controller="customerController">
+
+    <form>
+    <p><h4>Desde aqu&iacute; puede subir un archivo de texto para el alta de clientes.</h4></p>
+    <input id="txtFile" type="file" class="fullwidth" style="height: 100px;" accept="text/plain" ng-model="txtFile" ng-change="change()" />
+    <br/><br/>
+    <button class="quickformbutton" ng-click="upload()">Enviar</button>
+
+    </form>
+ </div>
+
